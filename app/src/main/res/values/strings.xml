@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">JetpackProject</string>
+    <string name="detail_label">"Item = %d"</string>
+</resources>
