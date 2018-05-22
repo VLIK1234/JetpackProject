@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">JetpackProject</string>
+
+    <string name="home">Home</string>
+    <string name="detail">Detail</string>
     <string name="detail_label">"Item = %d"</string>
+    <string name="settings">Settings</string>
 </resources>

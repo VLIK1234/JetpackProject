@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@+id/mainFragment">
 
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.bakachie.jetpackproject.ui.main.MainFragment"
-        android:label="main_fragment" >
+        android:label="@string/home" >
         <action
             android:id="@+id/detail_action"
             app:destination="@id/detailFragment"
@@ -14,10 +14,33 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/settingsAction"
+            app:destination="@+id/settings_activity"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+        <deepLink app:uri="jetpack.com/home" />
+        <deepLink app:uri="jet://jetpack.com/home"/>
     </fragment>
 
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.bakachie.jetpackproject.ui.detail.DetailFragment"
-        android:label="DetailFragment" />
+        android:label="@string/detail" >
+        <deepLink app:uri="jetpack.com/detail/{id}" />
+        <deepLink app:uri="jet://jetpack.com/detail/{id}"/>
+
+        <argument android:name="id" app:type="string" android:defaultValue="-1"/>
+    </fragment>
+
+    <activity
+        android:id="@+id/settings_activity"
+        android:name="com.example.bakachie.jetpackproject.ui.settings.SettingsActivity"
+        android:label="@string/settings">
+        <deepLink app:uri="jetpack.com/settings" />
+        <deepLink app:uri="jet://jetpack.com/settings" />
+    </activity>
 </navigation>

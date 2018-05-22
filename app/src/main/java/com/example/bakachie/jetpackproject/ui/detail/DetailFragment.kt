@@ -4,10 +4,12 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.bakachie.jetpackproject.R
+import com.example.bakachie.jetpackproject.bo.Item
 import com.example.bakachie.jetpackproject.ui.main.MainViewModel
 import kotlinx.android.synthetic.main.detail_fragment.*
 
@@ -24,8 +26,17 @@ class DetailFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(requireActivity()).get(MainViewModel::class.java)
         viewModel.selected().observe(this, Observer{
-            detail_label.text = getString(R.string.detail_label, it?.item)
+            detail_label.text = detailLabel(it)
         })
+
+        val id = arguments?.let {
+            val bundle = DetailFragmentArgs.fromBundle(it)
+            if (TextUtils.isEmpty(bundle.id)) null else Item(Integer.parseInt(bundle.id))
+        }
+
+        if (id?.item != -1){detail_label.text = detailLabel(id)}
     }
 
+    private fun detailLabel(id: Item?) =
+            getString(R.string.detail_label, id?.item)
 }
