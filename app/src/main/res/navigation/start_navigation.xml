@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/splashFragment">
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.bakachie.jetpackproject.ui.main.MainActivity"
+        android:label="@string/home"
+        tools:layout="@layout/main_activity"/>
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.bakachie.jetpackproject.ui.start.SplashFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/splash_frament">
+        <action
+            android:id="@+id/homeAction"
+            app:destination="@+id/mainActivity"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/loginAction"
+            app:destination="@+id/loginFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.bakachie.jetpackproject.ui.start.LoginFragment"
+        android:label="@string/login"
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/loginResultAction"
+            app:destination="@+id/splashFragment" />
+    </fragment>
+</navigation>
