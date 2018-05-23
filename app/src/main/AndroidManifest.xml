@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.main.MainActivity"
+            android:launchMode="singleTask" android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

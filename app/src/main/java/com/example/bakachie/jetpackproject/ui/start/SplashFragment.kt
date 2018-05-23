@@ -16,36 +16,31 @@ import com.example.bakachie.jetpackproject.bo.Credential
 
 class SplashFragment : Fragment() {
     private lateinit var viewModel: LoginViewModel
-    lateinit var navController: NavController
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.splash_frament, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view)
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(requireActivity()).get(LoginViewModel::class.java)
+//        viewModel.setCredential(viewModel.credential().value)
+//        viewModel.credential().observe(this, Observer {
+//            checkTokenAndNavigate(it)
+//        })
 
-        viewModel.setCredential(viewModel.credential().value)
-        viewModel.credential().observe(this, Observer {
-            checkTokenAndNavigate(it)
-        })
+        checkTokenAndNavigate(viewModel.credential().value)
     }
 
     private fun checkTokenAndNavigate(credential: Credential?) {
         if (credential?.token == null) {
             Handler(Looper.getMainLooper()).postDelayed({
                 run {
-                    navController.navigate(R.id.loginAction)
+                    view?.let { Navigation.findNavController(it).navigate(R.id.loginAction)  }
                 }
             }, 3000L)
         } else {
-            navController.navigate(R.id.homeAction)
+            view?.let { Navigation.findNavController(it).navigate(R.id.homeAction)  }
         }
     }
 }
