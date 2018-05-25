@@ -5,11 +5,11 @@ import android.os.Build
 
 class ActivityUtils {
     companion object {
-        fun close(activity: Activity) {
+        fun close(activity: Activity?) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                activity.finishAndRemoveTask()
+                activity?.finishAndRemoveTask()
             } else{
-                activity.finishAffinity()
+                activity?.finishAffinity()
             }
         }
     }

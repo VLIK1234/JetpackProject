@@ -24,14 +24,9 @@ class SplashFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
-        if (!Config.isFirstStart) {
-            ActivityUtils.close(requireActivity())
-        } else {
-            checkTokenAndNavigate(
-                    ViewModelProviders.of(requireActivity()).get(LoginViewModel::class.java).credential.value)
-            Config.isFirstStart = false
-        }
+        checkTokenAndNavigate(
+                ViewModelProviders.of(requireActivity()).get(LoginViewModel::class.java).credential.value)
+        Config.isFirstStart = false
     }
 
     private fun checkTokenAndNavigate(credential: Credential?) {
@@ -41,6 +36,7 @@ class SplashFragment : Fragment() {
                     view?.let { Navigation.findNavController(it).navigate(R.id.loginAction) }
                 } else {
                     view?.let {
+                        ActivityUtils.close(requireActivity())
                         Navigation.findNavController(it).navigate(R.id.homeAction)
                     }
                 }
