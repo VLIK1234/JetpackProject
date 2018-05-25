@@ -2,17 +2,15 @@ package com.example.bakachie.jetpackproject.ui.start
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import com.example.bakachie.jetpackproject.App
 import com.example.bakachie.jetpackproject.bo.Credential
 
 class LoginViewModel : ViewModel() {
 
-    private val credential: MutableLiveData<Credential?> = MutableLiveData()
+    val credential: MutableLiveData<Credential?> = MutableLiveData()
 
-    fun setCredential(credential: Credential?) {
-        this.credential.value = credential
-    }
-
-    fun credential() : MutableLiveData<Credential?> {
-        return credential
+    init {
+        val token : String? = App.prefs?.token
+        token?.let { credential.value = Credential(it) }
     }
 }

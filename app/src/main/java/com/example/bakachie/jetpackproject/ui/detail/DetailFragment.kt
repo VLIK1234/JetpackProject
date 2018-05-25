@@ -10,12 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.bakachie.jetpackproject.R
 import com.example.bakachie.jetpackproject.bo.Item
-import com.example.bakachie.jetpackproject.ui.main.MainViewModel
 import kotlinx.android.synthetic.main.detail_fragment.*
 
 class DetailFragment : Fragment() {
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: DetailViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -24,7 +23,7 @@ class DetailFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(requireActivity()).get(MainViewModel::class.java)
+        viewModel = ViewModelProviders.of(requireActivity()).get(DetailViewModel::class.java)
         viewModel.selected().observe(this, Observer{
             detail_label.text = detailLabel(it)
         })

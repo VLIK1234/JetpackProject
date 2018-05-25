@@ -10,6 +10,9 @@
         android:name="com.example.bakachie.jetpackproject.ui.main.MainFragment"
         android:label="@string/home" >
         <action
+            android:id="@+id/startAction"
+            app:destination="@+id/startActivity" />
+        <action
             android:id="@+id/detail_action"
             app:destination="@id/detailFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
@@ -45,5 +48,14 @@
         android:label="@string/settings">
         <deepLink app:uri="jetpack.com/settings" />
         <deepLink app:uri="jet://jetpack.com/settings" />
+    </activity>
+    <activity
+        android:id="@+id/startActivity"
+        android:name="com.example.bakachie.jetpackproject.ui.start.StartActivity"
+        android:label="StartActivity" >
+        <argument
+            android:name="deeplinkUri"
+            android:defaultValue="-1"
+            app:type="string" />
     </activity>
 </navigation>

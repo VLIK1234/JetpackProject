@@ -1,11 +1,11 @@
-package com.example.bakachie.jetpackproject.ui.main
+package com.example.bakachie.jetpackproject.ui.detail
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.example.bakachie.jetpackproject.bo.Item
 
-class MainViewModel : ViewModel() {
+class DetailViewModel : ViewModel() {
     private val itemsList: MutableLiveData<List<Item>> = MutableLiveData()
 
     private val selected: MutableLiveData<Item> = MutableLiveData()

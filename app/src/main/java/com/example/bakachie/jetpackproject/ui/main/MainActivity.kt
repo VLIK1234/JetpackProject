@@ -1,9 +1,12 @@
 package com.example.bakachie.jetpackproject.ui.main
 
+import android.content.Intent
 import android.content.res.Resources
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -12,12 +15,15 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.example.bakachie.jetpackproject.App
 import com.example.bakachie.jetpackproject.R
+import com.example.bakachie.jetpackproject.config.Config
 import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
 
     private var drawerLayout: DrawerLayout? = null
+    private lateinit var navController : NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                 .findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment? ?: return
 
         // Set up Action Bar
-        val navController = host.navController
+        navController = host.navController
         setupActionBar(navController)
 
         setupBottomNavMenu(navController)
@@ -45,6 +51,18 @@ class MainActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT).show()
             Log.d("NavigationActivity", "Navigated to $dest")
         }
+
+        handleDeeplink()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Config.isFirstStart = false
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        handleDeeplink()
     }
 
     private fun setupActionBar(navController: NavController) {
@@ -75,5 +93,20 @@ class MainActivity : AppCompatActivity() {
         return NavigationUI.onNavDestinationSelected(item,
                 Navigation.findNavController(this, R.id.my_nav_host_fragment))
                 || super.onOptionsItemSelected(item)
+    }
+
+    private fun handleDeeplink() {
+        if (TextUtils.isEmpty(App.prefs?.token)) return
+
+        if (intent.data != null) {
+            navController.onHandleDeepLink(intent)
+        } else {
+            val activityArgs = MainActivityArgs.fromBundle(intent.extras)
+
+            if (!TextUtils.isEmpty(activityArgs.deeplinkUri)) {
+                intent.data = Uri.parse(activityArgs.deeplinkUri)
+                navController.onHandleDeepLink(intent)
+            }
+        }
     }
 }
