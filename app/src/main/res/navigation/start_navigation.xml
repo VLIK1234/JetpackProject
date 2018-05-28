@@ -24,10 +24,7 @@
         tools:layout="@layout/login_fragment">
         <action
             android:id="@+id/loginResultAction"
-            app:clearTask="true"
-            app:destination="@id/mainActivity"
-            app:launchSingleTop="true"
-            app:popUpTo="@+id/mainActivity" />
+            app:destination="@id/mainActivity"/>
     </fragment>
 
     <activity

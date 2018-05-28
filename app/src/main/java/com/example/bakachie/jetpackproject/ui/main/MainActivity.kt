@@ -101,12 +101,13 @@ class MainActivity : AppCompatActivity() {
         if (intent.data != null) {
             navController.onHandleDeepLink(intent)
         } else {
-            val activityArgs = MainActivityArgs.fromBundle(intent.extras)
+            intent.extras?.let {
+                val activityArgs = MainActivityArgs.fromBundle(it)
 
-            if (!TextUtils.isEmpty(activityArgs.deeplinkUri)) {
-                intent.data = Uri.parse(activityArgs.deeplinkUri)
-                navController.onHandleDeepLink(intent)
-            }
+                if (!TextUtils.isEmpty(activityArgs.deeplinkUri)) {
+                    intent.data = Uri.parse(activityArgs.deeplinkUri)
+                    navController.onHandleDeepLink(intent)
+                }}
         }
     }
 }

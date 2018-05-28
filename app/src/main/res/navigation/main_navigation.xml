@@ -25,8 +25,7 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@+id/mainFragment" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
 
         <deepLink app:uri="jetpack.com/home" />
         <deepLink app:uri="jet://jetpack.com/home"/>
@@ -45,10 +44,7 @@
     <activity
         android:id="@+id/settings_activity"
         android:name="com.example.bakachie.jetpackproject.ui.settings.SettingsActivity"
-        android:label="@string/settings">
-        <deepLink app:uri="jetpack.com/settings" />
-        <deepLink app:uri="jet://jetpack.com/settings" />
-    </activity>
+        android:label="@string/settings"/>
     <activity
         android:id="@+id/startActivity"
         android:name="com.example.bakachie.jetpackproject.ui.start.StartActivity"
