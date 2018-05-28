@@ -11,10 +11,18 @@
         tools:layout="@layout/splash_frament">
         <action
             android:id="@+id/loginAction"
-            app:destination="@+id/loginFragment" />
+            app:destination="@+id/loginFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/homeAction"
-            app:destination="@+id/mainActivity" />
+            app:destination="@+id/mainActivity"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
     <fragment
@@ -24,7 +32,11 @@
         tools:layout="@layout/login_fragment">
         <action
             android:id="@+id/loginResultAction"
-            app:destination="@id/mainActivity"/>
+            app:destination="@id/mainActivity"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
     <activity

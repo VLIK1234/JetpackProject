@@ -5,7 +5,7 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home" />
     <item
-        android:id="@id/settings_activity"
+        android:id="@id/settingsActivity"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings" />
 </menu>

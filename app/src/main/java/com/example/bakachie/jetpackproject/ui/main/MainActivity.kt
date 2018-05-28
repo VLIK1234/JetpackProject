@@ -4,7 +4,6 @@ import android.content.Intent
 import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.util.Log
@@ -21,8 +20,6 @@ import com.example.bakachie.jetpackproject.config.Config
 import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
-
-    private var drawerLayout: DrawerLayout? = null
     private lateinit var navController : NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,19 +35,7 @@ class MainActivity : AppCompatActivity() {
         navController = host.navController
         setupActionBar(navController)
 
-        setupBottomNavMenu(navController)
-
-        navController.addOnNavigatedListener { _, destination ->
-            val dest: String = try {
-                resources.getResourceName(destination.id)
-            } catch (e: Resources.NotFoundException) {
-                Integer.toString(destination.id)
-            }
-
-            Toast.makeText(this@MainActivity, "$this@Navigated to $dest",
-                    Toast.LENGTH_SHORT).show()
-            Log.d("NavigationActivity", "Navigated to $dest")
-        }
+        reportOnNavigate()
 
         handleDeeplink()
     }
@@ -66,18 +51,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupActionBar(navController: NavController) {
-        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
+        NavigationUI.setupActionBarWithNavController(this, navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(drawerLayout,
+        return NavigationUI.navigateUp(null,
                 Navigation.findNavController(this, R.id.my_nav_host_fragment))
-    }
-
-    private fun setupBottomNavMenu(navController: NavController) {
-        bottom_nav_view?.let { bottomNavView ->
-            NavigationUI.setupWithNavController(bottomNavView, navController)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -93,6 +72,20 @@ class MainActivity : AppCompatActivity() {
         return NavigationUI.onNavDestinationSelected(item,
                 Navigation.findNavController(this, R.id.my_nav_host_fragment))
                 || super.onOptionsItemSelected(item)
+    }
+
+    private fun reportOnNavigate() {
+        navController.addOnNavigatedListener { _, destination ->
+            val dest: String = try {
+                resources.getResourceName(destination.id)
+            } catch (e: Resources.NotFoundException) {
+                Integer.toString(destination.id)
+            }
+
+            Toast.makeText(this@MainActivity, "$this@Navigated to $dest",
+                    Toast.LENGTH_SHORT).show()
+            Log.d("NavigationActivity", "Navigated to $dest")
+        }
     }
 
     private fun handleDeeplink() {
