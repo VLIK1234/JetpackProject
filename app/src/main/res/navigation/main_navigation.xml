@@ -2,13 +2,15 @@
 <navigation
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainNavigation"
     app:startDestination="@+id/mainFragment">
 
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.bakachie.jetpackproject.ui.main.MainFragment"
-        android:label="@string/home" >
+        android:label="@string/home"
+        tools:layout="@layout/main_fragment">
         <action
             android:id="@+id/startAction"
             app:destination="@+id/startActivity" />
@@ -34,7 +36,8 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.bakachie.jetpackproject.ui.detail.DetailFragment"
-        android:label="@string/detail" >
+        android:label="@string/detail"
+        tools:layout="@layout/detail_fragment">
         <deepLink app:uri="jetpack.com/detail/{id}" />
         <deepLink app:uri="jet://jetpack.com/detail/{id}"/>
 
@@ -44,11 +47,13 @@
     <activity
         android:id="@+id/settingsActivity"
         android:name="com.example.bakachie.jetpackproject.ui.settings.SettingsActivity"
-        android:label="@string/settings"/>
+        android:label="@string/settings"
+        tools:layout="@layout/settings_activity"/>
     <activity
         android:id="@+id/startActivity"
         android:name="com.example.bakachie.jetpackproject.ui.start.StartActivity"
-        android:label="StartActivity" >
+        android:label="StartActivity"
+        tools:layout="@layout/splash_frament">
         <argument
             android:name="deeplinkUri"
             android:defaultValue="-1"
